@@ -593,20 +593,7 @@
                 
                 <div class="bg-white rounded-lg shadow-lg p-6 mb-6 result-card card-hover">
                     <div class="grid gap-4">
-                        <div class="border-b pb-4 transition-all hover:bg-gray-50 p-3 rounded-lg">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-2 transition-all hover:text-blue-600">الاسم</h3>
-                            <p class="text-gray-700 card-content transition-all">${
-                              item.name || "غير محدد"
-                            }</p>
-                        </div>
-                        
-                        <div class="border-b pb-4 transition-all hover:bg-gray-50 p-3 rounded-lg">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-2 transition-all hover:text-blue-600">الرقم القومي</h3>
-                            <p class="text-gray-700 font-mono transition-all">${
-                              item.id || "غير محدد"
-                            }</p>
-                        </div>
-                        
+
                         <div class="border-b pb-4 transition-all hover:bg-gray-50 p-3 rounded-lg">
                             <h3 class="text-lg font-semibold text-gray-800 mb-2 transition-all hover:text-blue-600">الادارة الحالية</h3>
                             <p class="text-gray-700 card-content transition-all">${
@@ -651,10 +638,12 @@
         const nameBannerHtml = `
             <div class="name-banner">
                 <h2>${item.name || "غير محدد"}</h2>
-                <div class="subtitle">الرقم القومي: ${item.id || "غير محدد"}</div>
+                <div class="subtitle">الرقم القومي: ${
+                  item.id || "غير محدد"
+                }</div>
             </div>
         `;
-        
+
         resultsContainer.innerHTML = nameBannerHtml + cardHtml;
       }
 
@@ -718,11 +707,15 @@
           <!-- Name Banner for Multiple Results -->
           <div class="name-banner">
             <h2>${results[0].name || "غير محدد"}</h2>
-            <div class="subtitle">الرقم القومي: ${results[0].id || "غير محدد"}</div>
+            <div class="subtitle">الرقم القومي: ${
+              results[0].id || "غير محدد"
+            }</div>
           </div>
 
           <div class="multiple-results-header">
-            <div class="text-lg">تم العثور على ${results.length} طلب للرقم القومي ${results[0].id}</div>
+            <div class="text-lg">تم العثور على ${
+              results.length
+            } طلب للرقم القومي ${results[0].id}</div>
             <div class="text-sm mt-1">اضغط على أي طلب لعرض التفاصيل</div>
           </div>
         `;
@@ -745,8 +738,7 @@
             <div class="accordion-container">
               <div class="accordion-header" onclick="toggleAccordion('${accordionId}')">
                 <div>
-                  <div class="font-bold">${item.name || "غير محدد"}</div>
-                  <div class="text-sm opacity-90">الطلب رقم ${index + 1}</div>
+                  <div class="font-bold">الطلب رقم ${index + 1}</div>
                 </div>
                 <div class="accordion-icon" id="icon-${accordionId}">▼</div>
               </div>
