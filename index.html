@@ -354,6 +354,53 @@
         background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
         opacity: 0.1;
       }
+
+      /* Name banner styling */
+      .name-banner {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 20px 24px;
+        border-radius: 16px;
+        margin-bottom: 24px;
+        text-align: center;
+        box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
+        animation: fadeInUp 0.6s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .name-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .name-banner h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      .name-banner .subtitle {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-top: 8px;
+        position: relative;
+        z-index: 1;
+      }
     </style>
   </head>
   <body
@@ -362,7 +409,9 @@
     <!-- Main Header -->
     <div class="beautiful-header text-white py-8 shadow-2xl relative">
       <div class="container mx-auto px-4 text-center relative z-10">
-        <h1 class="text-5xl font-bold mb-4 fade-in-up drop-shadow-lg">تظلم كليات التمريض</h1>
+        <h1 class="text-5xl font-bold mb-4 fade-in-up drop-shadow-lg">
+          تظلم كليات التمريض
+        </h1>
         <div class="w-24 h-1 bg-white mx-auto rounded-full opacity-80"></div>
       </div>
     </div>
@@ -370,13 +419,17 @@
     <div class="container mx-auto px-4 py-12">
       <!-- Search Header -->
       <div class="text-center mb-12 fade-in-up">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4 transition-all hover:text-indigo-600">
+        <h2
+          class="text-4xl font-bold text-gray-800 mb-4 transition-all hover:text-indigo-600"
+        >
           نظام البحث بالرقم القومي
         </h2>
         <p class="text-gray-600 text-lg transition-all hover:text-gray-800">
           ابحث عن البيانات باستخدام الرقم القومي
         </p>
-        <div class="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mt-4"></div>
+        <div
+          class="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full mt-4"
+        ></div>
       </div>
 
       <!-- Search Form -->
@@ -524,6 +577,12 @@
         const bannerInfo = getOpinionBanner(item["opinion "]);
 
         const cardHtml = `
+                <!-- Name Banner -->
+                <div class="name-banner">
+                    <h2>${item.name || "غير محدد"}</h2>
+                    <div class="subtitle">الرقم القومي: ${item.id || "غير محدد"}</div>
+                </div>
+
                 <!-- Opinion Banner -->
                 <div class="opinion-banner ${bannerInfo.class}">
                     <div class="text-lg font-bold">${bannerInfo.text}</div>
@@ -676,6 +735,12 @@
               </div>
               <div class="accordion-content" id="${accordionId}">
                 <div class="p-6">
+                  <!-- Name Banner -->
+                  <div class="name-banner">
+                    <h2>${item.name || "غير محدد"}</h2>
+                    <div class="subtitle">الرقم القومي: ${item.id || "غير محدد"}</div>
+                  </div>
+
                   <!-- Opinion Banner -->
                   <div class="opinion-banner ${bannerInfo.class}">
                     <div class="text-lg font-bold">${bannerInfo.text}</div>
