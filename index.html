@@ -275,9 +275,95 @@
         background: linear-gradient(135deg, #6b7280, #4b5563);
         color: white;
       }
+
+      /* Dark mode styles */
+      .dark-mode {
+        background-color: #1f2937;
+        color: #f9fafb;
+      }
+
+      .dark-mode .bg-gray-50 {
+        background-color: #111827;
+      }
+
+      .dark-mode .bg-white {
+        background-color: #374151;
+        color: #f9fafb;
+      }
+
+      .dark-mode .text-gray-800 {
+        color: #f9fafb;
+      }
+
+      .dark-mode .text-gray-700 {
+        color: #d1d5db;
+      }
+
+      .dark-mode .text-gray-600 {
+        color: #9ca3af;
+      }
+
+      .dark-mode .border-gray-300 {
+        border-color: #4b5563;
+      }
+
+      .dark-mode .hover\:bg-gray-50:hover {
+        background-color: #4b5563;
+      }
+
+      .dark-mode .hover\:text-gray-800:hover {
+        color: #f9fafb;
+      }
+
+      .dark-mode .border-b {
+        border-color: #4b5563;
+      }
+
+      .dark-mode .border {
+        border-color: #4b5563;
+      }
+
+      .dark-mode .shadow-md {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      }
+
+      .dark-mode .shadow-lg {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Dark mode toggle button */
+      .dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: linear-gradient(135deg, #374151, #1f2937);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+      }
+
+      .dark-mode-toggle:hover {
+        background: linear-gradient(135deg, #4b5563, #374151);
+        transform: scale(1.05);
+      }
+
+      .dark-mode-toggle:active {
+        transform: scale(0.95);
+      }
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()" id="darkModeToggle">
+      🌙
+    </button>
+
     <!-- Main Header -->
     <div
       class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-6 shadow-lg"
@@ -335,9 +421,32 @@
 
     <script>
       let data = [];
+      let isDarkMode = false;
+
+      // Dark mode toggle function
+      function toggleDarkMode() {
+        isDarkMode = !isDarkMode;
+        const body = document.body;
+        const toggle = document.getElementById('darkModeToggle');
+        
+        if (isDarkMode) {
+          body.classList.add('dark-mode');
+          toggle.innerHTML = '☀️';
+          localStorage.setItem('darkMode', 'true');
+        } else {
+          body.classList.remove('dark-mode');
+          toggle.innerHTML = '🌙';
+          localStorage.setItem('darkMode', 'false');
+        }
+      }
 
       // Load data when page loads
       window.addEventListener("DOMContentLoaded", async () => {
+        // Check for saved dark mode preference
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === 'true') {
+          toggleDarkMode();
+        }
         try {
           const response = await fetch("data.json");
           data = await response.json();
